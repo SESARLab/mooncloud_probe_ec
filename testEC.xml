@@ -1,0 +1,13 @@
+<collector probe_driver="EncryptedChannelProbe" id="testsqlmap" cmid="testsqlmap">
+   <TestCases>
+      <TestCase>
+         <ID>1</ID>
+         <TestInstance Operation="config">
+            <Input>
+		<Item key="port" value="8080"/>
+                <Item key="host" value="192.168.43.29"/>
+            </Input>
+         </TestInstance>
+      </TestCase>
+   </TestCases>
+</collector>
