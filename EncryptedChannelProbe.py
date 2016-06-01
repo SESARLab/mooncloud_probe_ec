@@ -15,7 +15,6 @@ class EncryptedChannelProbe(Probe):
         if running != 0:
           raise Exception("Scan failed")
         resultnmap=proc.stdout
-        print result
         return NmapParser.parse(resultnmap)
       options = ""
       options = options + " --script ssl-cert,ssl-enum-ciphers "
