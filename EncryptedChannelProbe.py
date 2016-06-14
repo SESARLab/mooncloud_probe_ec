@@ -26,11 +26,19 @@ class EncryptedChannelProbe(Probe):
       
       scanResults = do_scan(self.testinstances["config"]["host"],options)
       for host in scanResults.hosts:
-        s=host.get_service(int(self.testinstances["config"]["port"]))
-        result=s.scripts_results
+        if host.get_service(int(self.testinstances["config"]["port"])).open():
+          print "PORT "+self.testinstances["config"]["port"]+" OPEN"
+          s=host.get_service(int(self.testinstances["config"]["port"]))
+          result=s.scripts_results
         if not result:
           return False
         else:  
+          issuer=result[0]['elements']['issuer']
+          pubkey=result[0]['elements']['pubkey']
+          validity=result[0]['elements']['validity']
+          print "ISSUED by: "+"country:"+issuer['country']+" - Organization name:" issuer['organizationName']+" - Common name:"+issuer['commonName']
+          print "Pub key:"+pubkey["bits"]+"/"+pubkey["type"]
+          print "Validity till:"+validity["notAfter"]
           strength=result[1]['elements']['least strength']
           if(strength=='A'):
             return True
